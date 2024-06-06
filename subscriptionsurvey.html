@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Perfumepedia</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'EB Garamond', serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header,
+        footer {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            position: fixed;
+            left: 0;
+            z-index: 1000;
+        }
+
+        header {
+            top: 0;
+            height: 13%;
+        }
+
+        footer {
+            bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ccc;
+        }
+
+        .footer-section {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            border-right: 1px solid #ccc;
+        }
+
+        .footer-section:last-child {
+            border-right: none;
+        }
+
+        .footer-section img {
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .content {
+            background-color: #e6e6e6;
+            flex: 1;
+            padding: 20px;
+            margin-top: 100px;
+            margin-bottom: 60px;
+            text-align: center;
+            overflow-y: auto;
+        }
+
+        .header-title {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            font-size: 1.5em;
+        }
+
+        .header-title a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+        }
+
+        .search-container {
+            position: absolute;
+            bottom: 10px;
+            left: 45%;
+            transform: translateX(-50%);
+            width: 80%;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: 'EB Garamond', serif;
+        }
+
+        .search-box::placeholder {
+            color: #999;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: -7%;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        .notification-container {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            height: 40px;
+            width: 40px;
+        }
+
+        .notification-icon {
+            position: absolute;
+            right: 15%;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 1.5em;
+            width: auto;
+            cursor: pointer;
+        }
+
+
+        .perfume-title {
+            margin: 5px 0 3px;
+            /* 위쪽과 아래쪽 마진을 조정 */
+        }
+
+        .manufacturer {
+            margin: 0;
+            /* 제조사 아래쪽 마진을 0으로 설정 */
+        }
+
+        .perfume-image {
+            margin: 5px 0 20px;
+            /* 위쪽과 아래쪽 마진을 조정 */
+        }
+
+        .star {
+            font-size: 30px;
+            color: #f7ac21;
+            /* 별의 색상을 여기에서 조정합니다 */
+        }
+
+        .perfume-image {
+            margin: 5px 0 20px;
+            position: relative;
+            /* 아이콘들을 상대적으로 위치시키기 위해 */
+        }
+
+        .icon-container {
+            margin-top: 0px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .icon-container img {
+            width: 30px;
+            /* 아이콘 크기 설정 */
+            height: auto;
+            /* 자동으로 높이 조정 */
+        }
+
+        .bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ccc;
+            margin-top: 5px;
+            position: relative;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #f7ac21;
+            position: absolute;
+            top: 0;
+            z-index: 100;
+        }
+
+        .progress2 {
+            height: 100%;
+            background-color: #82ab99;
+            position: absolute;
+            top: 0;
+            z-index: 50;
+        }
+
+        .progress3 {
+            height: 100%;
+            background-color: #8e8fcc;
+            position: absolute;
+            top: 0;
+        }
+
+        .percentage {
+            position: absolute;
+            top: -20px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .percentage2 {
+            position: absolute;
+            margin-left: 45%;
+            top: -20px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .percentage3 {
+            position: absolute;
+            margin-left: 90%;
+            top: -20px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .explanation {
+            width: 100%;
+            margin-top: 40%;
+            /* 이미지 아래 2줄 정도 여백 */
+        }
+
+        .note img {
+            width: 100%;
+            height: 10%;
+            margin-bottom: 10px;
+        }
+
+        .small-text {
+            font-size: 6px;
+        }
+
+        .survey-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            /* 모든 텍스트를 왼쪽으로 정렬 */
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .survey-container h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .survey-container form {
+            margin-top: 20px;
+        }
+
+        .survey-container fieldset {
+            border: none;
+            margin: 20px 0;
+            padding-left: 0;
+            /* 왼쪽 여백 제거 */
+        }
+
+        .survey-container label {
+            font-size: 16px;
+            color: #666;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .survey-container input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .survey-container button {
+            padding: 10px 20px;
+            background-color: #5c67f2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .survey-container button:hover {
+            background-color: #4a54e1;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            /* 웹킷 브라우저에서 기본 디자인 제거 */
+            width: 100%;
+            /* 전체 너비 사용 */
+            margin: 10px 0;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #a4a4a4;
+            cursor: pointer;
+            /* 커서를 손가락 모양으로 변경 */
+        }
+
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border: none;
+            border-radius: 4px;
+        }
+
+        input[type="range"]:focus {
+            outline: none;
+            /* 포커스시 외곽선 제거 */
+        }
+
+        output {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        label {
+            display: block;
+            margin-left: 20px;
+            /* 왼쪽에 마진 추가 */
+            text-align: left;
+            /* 텍스트를 왼쪽으로 정렬 */
+        }
+
+        .center-container {
+            display: flex;
+            justify-content: center;
+            /* 가로 방향 중앙 정렬 */
+            align-items: center;
+            /* 세로 방향 중앙 정렬 */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-title">
+            <a href="index.html">Perfumepedia</a>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="브랜드, 제품명, 노트 등으로 검색하세요">
+            <img src="icons/search.png" alt="검색" class="search-icon" onclick="search()">
+        </div>
+        <div class="notification-container">
+            <img src="icons/noti.png" alt="알림" class="notification-icon" onclick="location.href='notifications.html';">
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="survey-container">
+            <h1>구독 서비스 기본 정보 조사</h1>
+            <form action="/submit-your-survey" method="post">
+                <fieldset>
+                    <legend>1. 어떤 매장을 운영하고 계신가요?</legend>
+                    <label><input type="radio" name="storeType" value="cafe"> 카페</label>
+                    <label><input type="radio" name="storeType" value="clothing"> 옷가게</label>
+                    <label><input type="radio" name="storeType" value="restaurant"> 식당</label>
+                    <label><input type="radio" name="storeType" value="studyRoom"> 독서실</label>
+                    <label><input type="radio" name="storeType" value="other"> 기타</label>
+                </fieldset>
+                <fieldset>
+                    <legend>2. 매장의 크기는 어떻게 되나요?</legend>
+                    <label><input type="radio" name="subscriptionReason" value="convenience"> 10평 이하</label>
+                    <label><input type="radio" name="subscriptionReason" value="cost"> 10평 ~ 30평</label>
+                    <label><input type="radio" name="subscriptionReason" value="quality"> 30평 ~ 50평</label>
+                    <label><input type="radio" name="subscriptionReason" value="other"> 50평 이상</label>
+                </fieldset>
+                <fieldset>
+                    <legend>3. 어떤 분위기의 매장을 추구하시나요?</legend>
+                    <label for="store-atmosphere">a) 클래식 (1) - 모던 (10)</label>
+                    <input type="range" id="store-atmosphere" name="storeAtmosphere" min="1" max="10" value="5">
+                    <output id="atmosphere-output" for="store-atmosphere">5</output>
+                    <label for="store-atmosphere">b) 밝은 (1) - 어두운 (10)</label>
+                    <input type="range" id="store-atmosphere" name="storeAtmosphere" min="1" max="10" value="5">
+                    <output id="atmosphere-output" for="store-atmosphere">5</output>
+                    <label for="store-atmosphere">b) 우디 (1) - 메탈릭 (10)</label>
+                    <input type="range" id="store-atmosphere" name="storeAtmosphere" min="1" max="10" value="5">
+                    <output id="atmosphere-output" for="store-atmosphere">5</output>
+                </fieldset>
+                <fieldset>
+                    <legend>4. 희망 비용은 어떻게 되시나요?</legend>
+                    <label><input type="radio" name="subscriptionReason" value="convenience"> 10,000원/월</label>
+                    <label><input type="radio" name="subscriptionReason" value="cost"> 20,000원/월</label>
+                    <label><input type="radio" name="subscriptionReason" value="quality"> 30,000원/월</label>
+                    <label><input type="radio" name="subscriptionReason" value="other"> 40,000원/월</label>
+                </fieldset>
+
+                <div class="center-container">
+                    <button type="submit">제출</button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+
+
+
+    <footer>
+        <div class="footer-section" onclick="location.href='index.html'">
+            <img src="icons/home.png" alt="홈">
+        </div>
+        <div class="footer-section" onclick="location.href='subscriptionsurvey.html'">
+            <img src="icons/subscribe.png" alt="구독">
+        </div>
+        <div class="footer-section" onclick="location.href='news.html'">
+            <img src="icons/news.png" alt="소식">
+        </div>
+        <div class="footer-section" onclick="location.href='profile.html'">
+            <img src="icons/profile.png" alt="내 정보">
+        </div>
+    </footer>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.querySelector('.search-box');
+            searchBox.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    search();
+                }
+            });
+        });
+
+        function search() {
+            const query = document.querySelector('.search-box').value;
+            if (query) {
+                window.location.href = `search.html?query=${encodeURIComponent(query)}`;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const perfumeImage = document.querySelector('.perfume-image');
+            const starContainer = document.createElement('div');
+            starContainer.classList.add('star-container');
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('span');
+                star.classList.add('star');
+                if (i < 4) {
+                    star.innerHTML = '&#9733;'; // 별 모양 문자
+                } else {
+                    star.innerHTML = '&#9734;'; // 빈 별 모양 문자
+                }
+                starContainer.appendChild(star);
+            }
+            perfumeImage.appendChild(starContainer);
+
+            // by Chanel을 starContainer 아래로 이동
+            const manufacturer = document.querySelector('.manufacturer');
+            manufacturer.parentNode.insertBefore(starContainer, manufacturer.nextSibling);
+        });
+
+    </script>
+    <script>
+        const slider = document.getElementById('store-atmosphere');
+        const output = document.getElementById('atmosphere-output');
+        slider.oninput = function () {
+            output.value = this.value;
+        }
+    </script>
+
+</body>
+
+</html>
