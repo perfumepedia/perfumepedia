@@ -366,8 +366,11 @@
 
         function search() {
             const query = document.querySelector('.search-box').value;
-            if (query) {
-                window.location.href = `search.html?query=${encodeURIComponent(query)}`;
+            if (query == "샤넬") {
+                window.location.href = `search-result.html`;
+            }
+            else{
+                window.location.href = `no-result.html`;
             }
         }
         document.addEventListener('DOMContentLoaded', function () {
