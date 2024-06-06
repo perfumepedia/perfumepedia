@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Perfumepedia</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'EB Garamond', serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header,
+        footer {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            position: fixed;
+            left: 0;
+            z-index: 1000;
+        }
+
+        header {
+            top: 0;
+            height: 13%;
+        }
+
+        footer {
+            bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ccc;
+        }
+
+        .footer-section {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            border-right: 1px solid #ccc;
+        }
+
+        .footer-section:last-child {
+            border-right: none;
+        }
+
+        .footer-section img {
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .content {
+            background-color: #e6e6e6;
+            flex: 1;
+            padding: 20px;
+            margin-top: 50px;
+            margin-bottom: 60px;
+            text-align: center;
+            overflow-y: auto;
+        }
+
+        .header-title {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            font-size: 1.5em;
+        }
+
+        .header-title a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+        }
+
+        .search-container {
+            position: absolute;
+            bottom: 10px;
+            left: 45%;
+            transform: translateX(-50%);
+            width: 80%;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: 'EB Garamond', serif;
+        }
+
+        .search-box::placeholder {
+            color: #999;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: -7%;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        .notification-container {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            height: 40px;
+            width: 40px;
+        }
+
+        .notification-icon {
+            position: absolute;
+            right: 15%;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 1.5em;
+            width: auto;
+            cursor: pointer;
+        }
+
+
+        .perfume-title {
+            margin: 5px 0 3px;
+            /* 위쪽과 아래쪽 마진을 조정 */
+        }
+
+        .manufacturer {
+            margin: 0;
+            /* 제조사 아래쪽 마진을 0으로 설정 */
+        }
+
+        .perfume-image {
+            margin: 5px 0 20px;
+            /* 위쪽과 아래쪽 마진을 조정 */
+        }
+
+        .star {
+            font-size: 30px;
+            color: #f7ac21;
+            /* 별의 색상을 여기에서 조정합니다 */
+        }
+
+        .perfume-image {
+            margin: 5px 0 20px;
+            position: relative;
+            /* 아이콘들을 상대적으로 위치시키기 위해 */
+        }
+
+        .icon-container {
+            margin-top: 0px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .icon-container img {
+            width: 30px;
+            /* 아이콘 크기 설정 */
+            height: auto;
+            /* 자동으로 높이 조정 */
+        }
+
+        .bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ccc;
+            margin-top: 5px;
+            position: relative;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #f7ac21;
+            position: absolute;
+            top: 0;
+            z-index: 100;
+        }
+
+        .progress2 {
+            height: 100%;
+            background-color: #82ab99;
+            position: absolute;
+            top: 0;
+            z-index: 50;
+        }
+
+        .progress3 {
+            height: 100%;
+            background-color: #8e8fcc;
+            position: absolute;
+            top: 0;
+        }
+
+        .percentage {
+            position: absolute;
+            top: -20px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .percentage2 {
+            position: absolute;
+            margin-left: 45%;
+            top: -20px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .percentage3 {
+            position: absolute;
+            margin-left: 90%;
+            top: -20px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .explanation {
+            width: 100%;
+            margin-top: 40%;
+            /* 이미지 아래 2줄 정도 여백 */
+        }
+
+        .note img {
+            width: 100%;
+            height: 10%;
+            margin-bottom: 10px;
+        }
+
+        .small-text {
+            font-size: 6px;
+        }
+        .middle-text {
+            font-size: 13px;
+        }
+
+        .survey-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            /* 모든 텍스트를 왼쪽으로 정렬 */
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        .survey-container h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .survey-container form {
+            margin-top: 20px;
+        }
+
+        .survey-container fieldset {
+            border: none;
+            margin: 20px 0;
+            padding-left: 0;
+            /* 왼쪽 여백 제거 */
+        }
+
+        .survey-container label {
+            font-size: 16px;
+            color: #666;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .survey-container input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .survey-container button {
+            padding: 10px 20px;
+            background-color: #b8b8b8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .survey-container button:hover {
+            background-color: #b7b6ab;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            /* 웹킷 브라우저에서 기본 디자인 제거 */
+            width: 100%;
+            /* 전체 너비 사용 */
+            margin: 10px 0;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #a4a4a4;
+            cursor: pointer;
+            /* 커서를 손가락 모양으로 변경 */
+        }
+
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border: none;
+            border-radius: 4px;
+        }
+
+        input[type="range"]:focus {
+            outline: none;
+            /* 포커스시 외곽선 제거 */
+        }
+
+        output {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        label {
+            display: block;
+            margin-left: 20px;
+            /* 왼쪽에 마진 추가 */
+            text-align: left;
+            /* 텍스트를 왼쪽으로 정렬 */
+        }
+
+        .center-container {
+            display: flex;
+            justify-content: center;
+            /* 가로 방향 중앙 정렬 */
+            align-items: center;
+            /* 세로 방향 중앙 정렬 */
+        }
+
+        h3 {
+            font-weight: normal;
+            /* 굵게 표시되지 않도록 설정 */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-title">
+            <a href="index.html">Perfumepedia</a>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="브랜드, 제품명, 노트 등으로 검색하세요">
+            <img src="icons/search.png" alt="검색" class="search-icon" onclick="search()">
+        </div>
+        <div class="notification-container">
+            <img src="icons/noti.png" alt="알림" class="notification-icon" onclick="location.href='notifications.html';">
+        </div>
+    </header>
+    <div class="content">
+        <div class="result-title" style="margin-top: 15%; background-color: white; border-radius: 5%; height: 90%;">
+            <h3><br>검색 결과가 없어요.</h3>
+            <p class="middle-text">다른 검색어로 다시 시도해 주세요.</p>
+            <img src="icons/no-result.png" alt="검색 결과 없음" style="width: 45%; margin-top: 17%;">
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="footer-section" onclick="location.href='index.html'">
+            <img src="icons/home.png" alt="홈">
+        </div>
+        <div class="footer-section" onclick="location.href='subscriptionsurvey.html'">
+            <img src="icons/subscribe.png" alt="구독">
+        </div>
+        <div class="footer-section" onclick="location.href='news.html'">
+            <img src="icons/news.png" alt="소식">
+        </div>
+        <div class="footer-section" onclick="location.href='profile.html'">
+            <img src="icons/profile.png" alt="내 정보">
+        </div>
+    </footer>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.querySelector('.search-box');
+            searchBox.addEventListener('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    search();
+                }
+            });
+        });
+
+        function search() {
+            const query = document.querySelector('.search-box').value;
+            if (query == "샤넬") {
+                window.location.href = `search-result.html`;
+            }
+            else {
+                window.location.href = `no-result.html`;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const createStarContainer = (totalStars, filledStars) => {
+                const starContainer = document.createElement('div');
+                starContainer.classList.add('star-container');
+                for (let i = 0; i < totalStars; i++) {
+                    const star = document.createElement('span');
+                    star.classList.add('star');
+                    if (i < filledStars) {
+                        star.innerHTML = '&#9733;'; // 채워진 별 모양 문자
+                    } else {
+                        star.innerHTML = '&#9734;'; // 빈 별 모양 문자
+                    }
+                    starContainer.appendChild(star);
+                }
+                return starContainer;
+            };
+
+            const perfumes = [
+                { selector: '.serach-result:nth-of-type(1) .stars', totalStars: 5, filledStars: 4 },
+                { selector: '.serach-result:nth-of-type(2) .stars', totalStars: 5, filledStars: 5 },
+                { selector: '.serach-result:nth-of-type(3) .stars', totalStars: 5, filledStars: 3 },
+            ];
+
+            perfumes.forEach(perfume => {
+                const starsContainer = document.querySelector(perfume.selector);
+                const stars = createStarContainer(perfume.totalStars, perfume.filledStars);
+                starsContainer.appendChild(stars);
+            });
+        });
+
+
+    </script>
+    <script>
+        const slider = document.getElementById('store-atmosphere');
+        const output = document.getElementById('atmosphere-output');
+        slider.oninput = function () {
+            output.value = this.value;
+        }
+    </script>
+
+</body>
+
+</html>
