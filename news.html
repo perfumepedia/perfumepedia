@@ -242,6 +242,7 @@
         .small-text {
             font-size: 15px;
         }
+
         .smallest-text {
             font-size: 10px;
         }
@@ -387,7 +388,7 @@
             <img src="icons\no noti.jpg" alt="No Notifications" style="width: 80%;">
             <p class="small-text">뉴스 레터 구독 시, <br>문자, 이메일로 알람이 갑니다</p>
             <p class="smallest-text">*내 정보에서 수신 설정 변경 가능<br>(수신 동의일 2024년 6월 3일)</p>
-    
+
         </div>
     </div>
 
@@ -423,8 +424,11 @@
 
         function search() {
             const query = document.querySelector('.search-box').value;
-            if (query) {
-                window.location.href = `search.html?query=${encodeURIComponent(query)}`;
+            if (query == "샤넬") {
+                window.location.href = `search-result.html`;
+            }
+            else {
+                window.location.href = `no-result.html`;
             }
         }
         document.addEventListener('DOMContentLoaded', function () {
