@@ -389,15 +389,21 @@
                 </fieldset>
                 <fieldset>
                     <legend>3. 어떤 분위기의 매장을 추구하시나요?</legend>
-                    <label for="store-atmosphere">a) 클래식 (1) - 모던 (10)</label>
-                    <input type="range" id="store-atmosphere" name="storeAtmosphere" min="1" max="10" value="5">
-                    <output id="atmosphere-output" for="store-atmosphere">5</output>
-                    <label for="store-atmosphere">b) 밝은 (1) - 어두운 (10)</label>
-                    <input type="range" id="store-atmosphere" name="storeAtmosphere" min="1" max="10" value="5">
-                    <output id="atmosphere-output" for="store-atmosphere">5</output>
-                    <label for="store-atmosphere">b) 우디 (1) - 메탈릭 (10)</label>
-                    <input type="range" id="store-atmosphere" name="storeAtmosphere" min="1" max="10" value="5">
-                    <output id="atmosphere-output" for="store-atmosphere">5</output>
+
+                    <label for="store-atmosphere-classic-modern">a) 클래식 (1) - 모던 (10)</label>
+                    <input type="range" id="store-atmosphere-classic-modern" name="storeAtmosphereClassicModern" min="1"
+                        max="10" value="5">
+                    <output id="atmosphere-output-classic-modern" for="store-atmosphere-classic-modern">5</output>
+
+                    <label for="store-atmosphere-bright-dark">b) 밝은 (1) - 어두운 (10)</label>
+                    <input type="range" id="store-atmosphere-bright-dark" name="storeAtmosphereBrightDark" min="1"
+                        max="10" value="5">
+                    <output id="atmosphere-output-bright-dark" for="store-atmosphere-bright-dark">5</output>
+
+                    <label for="store-atmosphere-woody-metallic">c) 우디 (1) - 메탈릭 (10)</label>
+                    <input type="range" id="store-atmosphere-woody-metallic" name="storeAtmosphereWoodyMetallic" min="1"
+                        max="10" value="5">
+                    <output id="atmosphere-output-woody-metallic" for="store-atmosphere-woody-metallic">5</output>
                 </fieldset>
                 <fieldset>
                     <legend>4. 희망 비용은 어떻게 되시나요?</legend>
@@ -408,7 +414,7 @@
                 </fieldset>
             </form>
             <div class="center-container">
-                <button onclick="location.href='result.html'">제출</button>
+                <button onclick="location.href='subs-result.html'">제출</button>
             </div>
         </div>
 
@@ -445,8 +451,11 @@
 
         function search() {
             const query = document.querySelector('.search-box').value;
-            if (query) {
-                window.location.href = `search.html?query=${encodeURIComponent(query)}`;
+            if (query == "샤넬") {
+                window.location.href = `search-result.html`;
+            }
+            else{
+                window.location.href = `no-result.html`;
             }
         }
         document.addEventListener('DOMContentLoaded', function () {
@@ -472,10 +481,22 @@
 
     </script>
     <script>
-        const slider = document.getElementById('store-atmosphere');
-        const output = document.getElementById('atmosphere-output');
-        slider.oninput = function () {
-            output.value = this.value;
+        const sliderClassicModern = document.getElementById('store-atmosphere-classic-modern');
+        const outputClassicModern = document.getElementById('atmosphere-output-classic-modern');
+        sliderClassicModern.oninput = function () {
+            outputClassicModern.value = this.value;
+        }
+
+        const sliderBrightDark = document.getElementById('store-atmosphere-bright-dark');
+        const outputBrightDark = document.getElementById('atmosphere-output-bright-dark');
+        sliderBrightDark.oninput = function () {
+            outputBrightDark.value = this.value;
+        }
+
+        const sliderWoodyMetallic = document.getElementById('store-atmosphere-woody-metallic');
+        const outputWoodyMetallic = document.getElementById('atmosphere-output-woody-metallic');
+        sliderWoodyMetallic.oninput = function () {
+            outputWoodyMetallic.value = this.value;
         }
     </script>
 
