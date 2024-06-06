@@ -367,51 +367,7 @@
     </header>
 
     <div class="content">
-        <div class="survey-container">
-            <h1>구독 서비스 기본 정보 조사</h1>
-            <form action="/submit-your-survey" method="post">
-                <fieldset>
-                    <legend>1. 어떤 매장을 운영하고 계신가요?</legend>
-                    <label><input type="radio" name="storeType" value="cafe"> 카페</label>
-                    <label><input type="radio" name="storeType" value="clothing"> 옷가게</label>
-                    <label><input type="radio" name="storeType" value="restaurant"> 식당</label>
-                    <label><input type="radio" name="storeType" value="studyRoom"> 독서실</label>
-                    <label><input type="radio" name="storeType" value="other"> 기타</label>
-                </fieldset>
-                <fieldset>
-                    <legend>2. 매장의 크기는 어떻게 되나요?</legend>
-                    <label><input type="radio" name="subscriptionReason" value="convenience"> 10평 이하</label>
-                    <label><input type="radio" name="subscriptionReason" value="cost"> 10평 ~ 30평</label>
-                    <label><input type="radio" name="subscriptionReason" value="quality"> 30평 ~ 50평</label>
-                    <label><input type="radio" name="subscriptionReason" value="other"> 50평 이상</label>
-                </fieldset>
-                <fieldset>
-                    <legend>3. 어떤 분위기의 매장을 추구하시나요?</legend>
-                    <label for="store-atmosphere">a) 클래식 (1) - 모던 (10)</label>
-                    <input type="range" id="store-atmosphere" name="storeAtmosphere" min="1" max="10" value="5">
-                    <output id="atmosphere-output" for="store-atmosphere">5</output>
-                    <label for="store-atmosphere">b) 밝은 (1) - 어두운 (10)</label>
-                    <input type="range" id="store-atmosphere" name="storeAtmosphere" min="1" max="10" value="5">
-                    <output id="atmosphere-output" for="store-atmosphere">5</output>
-                    <label for="store-atmosphere">b) 우디 (1) - 메탈릭 (10)</label>
-                    <input type="range" id="store-atmosphere" name="storeAtmosphere" min="1" max="10" value="5">
-                    <output id="atmosphere-output" for="store-atmosphere">5</output>
-                </fieldset>
-                <fieldset>
-                    <legend>4. 희망 비용은 어떻게 되시나요?</legend>
-                    <label><input type="radio" name="subscriptionReason" value="convenience"> 10,000원/월</label>
-                    <label><input type="radio" name="subscriptionReason" value="cost"> 20,000원/월</label>
-                    <label><input type="radio" name="subscriptionReason" value="quality"> 30,000원/월</label>
-                    <label><input type="radio" name="subscriptionReason" value="other"> 40,000원/월</label>
-                </fieldset>
-
-                <div class="center-container">
-                    <button onclick="location.href='result.html'">제출</button>
-                </div>
-            </form>
-        </div>
-
-
+        
     </div>
 
 

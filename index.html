@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Perfumepedia</title>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -84,6 +85,7 @@
             left: 45%;
             transform: translateX(-50%);
             width: 80%;
+            font-family: 'Noto Serif KR', serif;
         }
 
         .search-box {
@@ -133,6 +135,7 @@
             justify-content: space-between;
             border-bottom: 0.5px solid #9d9d9d;
             padding-bottom: 10px;
+            font-family: 'Noto Serif KR', serif;
         }
 
         .category {
@@ -160,10 +163,11 @@
         }
 
         .box-title {
-            font-size: 1.2em;
+            font-size: 1.1em;
             color: #555;
             padding: 10px;
             text-align: left;
+            font-family: 'Noto Serif KR', serif;
         }
 
         .slide-container {
@@ -251,7 +255,7 @@
 
         <!-- 박스 4개  -->
         <div class="box" id="personal-recommendations">
-            <div class="box-title">Personal Recommendations</div>
+            <div class="box-title">취향 맞춤 추천</div>
             <div class="slide-container">
                 <button class="nav-button prev" onclick="prevSlide(0)">&#10094;</button>
                 <div class="slide-track" id="slideTrack0">
@@ -297,7 +301,7 @@
         </div>
 
         <div class="box" id="trending-perfumes">
-            <div class="box-title">Trending Perfumes</div>
+            <div class="box-title">인기있는 제품</div>
             <div class="slide-container">
                 <button class="nav-button prev" onclick="prevSlide(1)">&#10094;</button>
                 <div class="slide-track" id="slideTrack1">
@@ -342,7 +346,7 @@
         </div>
 
         <div class="box" id="trending-brands">
-            <div class="box-title">Trending Brands</div>
+            <div class="box-title">인기있는 브랜드</div>
             <div class="slide-container">
                 <button class="nav-button prev" onclick="prevSlide(2)">&#10094;</button>
                 <div class="slide-track" id="slideTrack2">
@@ -387,7 +391,7 @@
         </div>
 
         <div class="box" id="high-rated">
-            <div class="box-title">High Rated</div>
+            <div class="box-title">리뷰 평점 높은 제품</div>
             <div class="slide-container">
                 <button class="nav-button prev" onclick="prevSlide(3)">&#10094;</button>
                 <div class="slide-track" id="slideTrack3">
@@ -432,7 +436,7 @@
         </div>
 
         <div class="box" id="room-fragrances">
-            <div class="box-title">Room Fragrances</div>
+            <div class="box-title">추천 방향제</div>
             <div class="slide-container">
                 <button class="nav-button prev" onclick="prevSlide(4)">&#10094;</button>
                 <div class="slide-track" id="slideTrack4">
