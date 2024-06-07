@@ -64,7 +64,7 @@
             background-color: #e6e6e6;
             flex: 1;
             padding: 20px;
-            margin-top: 90px;
+            margin-top: 50px;
             margin-bottom: 60px;
             text-align: center;
             overflow-y: auto;
@@ -240,10 +240,7 @@
         }
 
         .small-text {
-            font-size: 15px;
-        }
-        .smallest-text {
-            font-size: 10px;
+            font-size: 6px;
         }
 
         .survey-container {
@@ -355,13 +352,15 @@
             /* 세로 방향 중앙 정렬 */
         }
 
-        .empty-box {
-            font-family: 'Noto Serif KR', serif;
-            background-color: white
+        .checkmark {
+            display: none;
+            color: green;
+            font-weight: bold;
         }
 
-        .small-text {
-            font-size: 10px;
+        .error {
+            color: red;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -381,15 +380,88 @@
     </header>
 
     <div class="content">
-        <div class="empty-box" style="height: 97%; border-radius: 5%;">
-            <p class="small-text"><br></p>
-            <h2>회원가입 기능 구현 중</h2>
-            <img src="icons/working.png" alt="공사중" style="width: 80%;">
-    
+        <div class="survey-container">
+            <h1>회원가입</h1>
+            <form action="/submit-your-survey" method="post">
+                <fieldset>
+                    <legend>아이디를 설정해주세요</legend>
+                    <input type="text" id="username" onblur="checkInput(this, 'usernameCheck')">
+                    <span id="usernameCheck" class="checkmark"></span>
+                </fieldset>
+                <fieldset>
+                    <legend>비밀번호를 설정해주세요</legend>
+                    <input type="password" id="password" onblur="checkInput(this, 'passwordCheck')">
+                    <span id="passwordCheck" class="checkmark"></span>
+                </fieldset>
+                <fieldset>
+                    <legend>비밀번호를 확인해주세요</legend>
+                    <input type="password" id="confirmPassword"
+                        onblur="checkInput(this, 'confirmPasswordCheck', 'password')">
+                    <span id="confirmPasswordCheck" class="checkmark"></span>
+                </fieldset>
+                <fieldset>
+                    <legend>성별이 어떻게 되시나요?</legend>
+                    <label><input type="radio" name="gender" value="male"> 남자</label>
+                    <label><input type="radio" name="gender" value="female"> 여자</label>
+                    <label><input type="radio" name="gender" value="none"> 무응답</label>
+                    <label><input type="radio" name="gender" value="other"> 기타</label>
+                </fieldset>
+                <fieldset>
+                    <legend>연령대가 어떻게 되시나요?</legend>
+                    <label><input type="radio" name="age" value="under20"> 20세 미만</label>
+                    <label><input type="radio" name="age" value="20to30"> 20~30세</label>
+                    <label><input type="radio" name="age" value="30to40"> 30~40세</label>
+                    <label><input type="radio" name="age" value="40to50"> 40~50세</label>
+                    <label><input type="radio" name="age" value="over50"> 50세 이상</label>
+                </fieldset>
+                <fieldset>
+                    <legend>연락처를 입력해주세요</legend>
+                    <input type="text" id="phone" onblur="validateNumber(this, 'phoneCheck')">
+                    <span id="phoneCheck" class="checkmark"></span>
+                </fieldset>
+                <fieldset>
+                    <legend>주소를 입력해주세요</legend>
+                    <input type="text" id="address" onblur="checkInput(this, 'addressCheck')">
+                    <span id="addressCheck" class="checkmark"></span>
+                </fieldset>
+                <fieldset>
+                    <legend>다음 중 본인의 성향을 가장 잘 묘사하는 단어를 3개 선택해주세요.</legend>
+                    <label><input type="checkbox" name="traits" value="detailed"> 꼼꼼한</label>
+                    <label><input type="checkbox" name="traits" value="timid"> 소심한</label>
+                    <label><input type="checkbox" name="traits" value="rational"> 이성적인</label>
+                    <label><input type="checkbox" name="traits" value="active"> 활발한</label>
+                    <label><input type="checkbox" name="traits" value="trendy"> 트렌디한</label>
+                </fieldset>
+                <fieldset>
+                    <legend>다음 중 본인이 평소에 좋아하는 향을 가장 잘 묘사하는 단어를 3개 선택해주세요.</legend>
+                    <label><input type="checkbox" name="scents" value="flower"> 꽃</label>
+                    <label><input type="checkbox" name="scents" value="wood"> 나무</label>
+                    <label><input type="checkbox" name="scents" value="sea"> 바다</label>
+                    <label><input type="checkbox" name="scents" value="cozy"> 포근한</label>
+                    <label><input type="checkbox" name="scents" value="sweet"> 달콤한</label>
+                    <label><input type="checkbox" name="scents" value="cool"> 시원한</label>
+                    <label><input type="checkbox" name="scents" value="bitter"> 쌉싸름한</label>
+                </fieldset>
+                <fieldset>
+                    <legend>회원 구분을 선택해주세요? (카페 등 사업체 인 경우 매장, 그외에는 개인)</legend>
+                    <label><input type="radio" name="memberType" value="individual"> 개인 회원</label>
+                    <label><input type="radio" name="memberType" value="store"> 매장 회원</label>
+                </fieldset>
+                <fieldset>
+                    <legend>구독 희망 개월 수를 선택해주세요.</legend>
+                    <label><input type="radio" name="subscriptionPeriod" value="1month"> 1개월 (9,900원/월)</label>
+                    <label><input type="radio" name="subscriptionPeriod" value="3months"> 3개월 (8,900원/월)</label>
+                    <label><input type="radio" name="subscriptionPeriod" value="6months"> 6개월 (6,900원/월)</label>
+                    <label><input type="radio" name="subscriptionPeriod" value="12months"> 12개월 (4,900원/월)</label>
+                </fieldset>
+            </form>
+            <div class="center-container">
+                <button type="button" onclick="handleSubmit(event)">제출</button>
+            </div>
         </div>
+
+
     </div>
-
-
 
 
 
@@ -418,13 +490,57 @@
                 }
             });
         });
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert("회원 가입이 완료됐습니다. \n결제 정보는 차후 서비스 개시 후 내 프로필에서 등록 가능합니다. \n감사합니다.");
+            window.location.href = 'index.html';
+        }
+        function checkInput(input, checkId, compareWithId = null) {
+            const checkmark = document.getElementById(checkId);
+            const value = input.value.trim();
+            if (value === "") {
+                checkmark.style.display = 'none';
+                return;
+            }
+            if (compareWithId) {
+                const compareValue = document.getElementById(compareWithId).value.trim();
+                if (value === compareValue) {
+                    checkmark.textContent = '✔';
+                    checkmark.classList.remove('error');
+                } else {
+                    checkmark.innerHTML = '<br>비밀번호가 일치하지 않습니다';
+                    checkmark.classList.add('error');
+                }
+            } else {
+                checkmark.textContent = '✔';
+                checkmark.classList.remove('error');
+            }
+            checkmark.style.display = 'inline';
+        }
 
+        function validateNumber(input, checkId) {
+            const checkmark = document.getElementById(checkId);
+            const value = input.value.trim();
+            if (value === "") {
+                checkmark.style.display = 'none';
+                return;
+            }
+            if (/^\d+$/.test(value)) {
+                checkmark.textContent = '✔';
+                checkmark.classList.remove('error');
+            } else {
+                checkmark.innerHTML = '<br>숫자만 입력해주세요';
+                checkmark.classList.add('error');
+
+            }
+            checkmark.style.display = 'inline';
+        }
         function search() {
             const query = document.querySelector('.search-box').value;
             if (query == "샤넬") {
                 window.location.href = `search-result.html`;
             }
-            else{
+            else {
                 window.location.href = `no-result.html`;
             }
         }
@@ -451,10 +567,22 @@
 
     </script>
     <script>
-        const slider = document.getElementById('store-atmosphere');
-        const output = document.getElementById('atmosphere-output');
-        slider.oninput = function () {
-            output.value = this.value;
+        const sliderClassicModern = document.getElementById('store-atmosphere-classic-modern');
+        const outputClassicModern = document.getElementById('atmosphere-output-classic-modern');
+        sliderClassicModern.oninput = function () {
+            outputClassicModern.value = this.value;
+        }
+
+        const sliderBrightDark = document.getElementById('store-atmosphere-bright-dark');
+        const outputBrightDark = document.getElementById('atmosphere-output-bright-dark');
+        sliderBrightDark.oninput = function () {
+            outputBrightDark.value = this.value;
+        }
+
+        const sliderWoodyMetallic = document.getElementById('store-atmosphere-woody-metallic');
+        const outputWoodyMetallic = document.getElementById('atmosphere-output-woody-metallic');
+        sliderWoodyMetallic.oninput = function () {
+            outputWoodyMetallic.value = this.value;
         }
     </script>
 
