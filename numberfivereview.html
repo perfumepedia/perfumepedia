@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Perfumepedia</title>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -283,6 +284,23 @@
         </div>
         <div class="explanation" style="width: 100%;">
             <br><br><br>
+            <div class="review box"
+                style="display: flex;justify-content: center;align-items: center; background-color: #ededed; border-radius: 5%; width: 100%;">
+                <div class="review"
+                    style="font-family: 'Gowun Batang', serif; text-align: left; background-color: #ededed; border-radius: 5%; width: 80%;">
+                    <h3>한 줄 리뷰</h3>
+                    <p>(여성, estp, 향수 관심도 중, 선호 향:-)<br>
+                        <b>지금 계절감과도 맞고 향의 세기도 적당해요</b><br>[작성일: 2024.05.23.]<br><br>
+                        (여성, estj, 향수 관심도 상, 선호 향: 은방울, 프리지아)<br>
+                        <b>선호하는 향과 유사하고 계절감이 잘 맞아요</b><br>[작성일: 2024.05.23.]<br><br>
+                        (남성, intp, 향수 관심도 하, 선호 향: 우디)<br>
+                        <b>향이 세서 데일리하게 쓰긴 어려워보입니다.</b><br>[작성일: 2024.05.23.]<br><br>
+                        (여성, esfp, 향수 관심도 중, 선호 향: 자연스러운 플로럴 향)<br>
+                        <b>선호하는 향과 유사하여 좋지만 호불호가 있을 것 같아요</b><br>[작성일: 2024.05.23.]<br><br>
+                    </p>
+                </div>
+            </div>
+
             <h3>Basic Informations</h3>
             <p>A timeless, legendary fragrance in a radically minimal bottle, CHANEL N°5 is the very essence of
                 femininity. Its floral-aldehydic bouquet is the epitome of Gabrielle Chanel’s initial request: “a
@@ -369,7 +387,7 @@
             if (query == "샤넬") {
                 window.location.href = `search-result.html`;
             }
-            else{
+            else {
                 window.location.href = `no-result.html`;
             }
         }
